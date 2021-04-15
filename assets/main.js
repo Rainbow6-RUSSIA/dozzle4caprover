@@ -21,7 +21,7 @@ Vue.use(Modal);
 Vue.use(Autocomplete);
 
 const caproverRelatedWhitelist = [
-  /srv-captain--.+\.\d+\..+/g,
+  /srv-captain--.+/g,
   /captain-certbot\.\d+\..+/g,
   /captain-nginx\.\d+\..+/g,
   /captain-captain\.\d+\..+/g,
@@ -29,14 +29,20 @@ const caproverRelatedWhitelist = [
 ];
 
 Vue.filter("caprover", (value) => {
-  if (!store.state.settings.caproverIntergration | !caproverRelatedWhitelist.some((re) => re.test(value))) return value;
+  const isEnabled = store.state.settings.caproverIntergration;
+  const isCaprover = caproverRelatedWhitelist.some((re) => re.test(value));
+  if (!isEnabled | !isCaprover) return value;
 
+  // WTF?
+  // Why this console.log fixes render???????
+
+  console.log(caproverRelatedWhitelist.some((re) => re.test(value)));
   const parts = value.split(".");
 
   if (value.startsWith("srv-captain--")) {
     return `${parts[0].slice(13)}#${parts[1]} | CapRover`;
   } else {
-    return `${parts[0]} | CapRover (internal)`;
+    return `${parts[0].slice(8)} | CapRover (internal)`;
   }
 });
 
