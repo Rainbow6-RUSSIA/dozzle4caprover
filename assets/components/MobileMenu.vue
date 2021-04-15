@@ -33,7 +33,7 @@
           :title="item.name"
         >
           <div class="is-ellipsis">
-            {{ item.name }}
+            {{ item.name | caprover }}
           </div>
         </router-link>
       </li>

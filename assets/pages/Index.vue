@@ -64,7 +64,7 @@
             :key="item.id"
             class="panel-block"
           >
-            <span class="name">{{ item.name }}</span>
+            <span class="name">{{ item.name | caprover }}</span>
 
             <div class="subtitle is-7 status">
               <past-time :date="new Date(item.created * 1000)"></past-time>

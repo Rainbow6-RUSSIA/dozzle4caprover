@@ -1,6 +1,6 @@
 <template>
   <div class="columns is-marginless has-text-weight-bold is-family-monospace">
-    <span class="column is-ellipsis">{{ value }}</span>
+    <span class="column is-ellipsis">{{ value | caprover }}</span>
   </div>
 </template>
 

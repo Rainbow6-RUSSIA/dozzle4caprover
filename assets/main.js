@@ -20,6 +20,26 @@ Vue.use(Field);
 Vue.use(Modal);
 Vue.use(Autocomplete);
 
+const caproverRelatedWhitelist = [
+  /srv-captain--.+\.\d+\..+/g,
+  /captain-certbot\.\d+\..+/g,
+  /captain-nginx\.\d+\..+/g,
+  /captain-captain\.\d+\..+/g,
+  /captain-netdata-container/g,
+];
+
+Vue.filter("caprover", (value) => {
+  if (!store.state.settings.caproverIntergration | !caproverRelatedWhitelist.some((re) => re.test(value))) return value;
+
+  const parts = value.split(".");
+
+  if (value.startsWith("srv-captain--")) {
+    return `${parts[0].slice(13)}#${parts[1]} | CapRover`;
+  } else {
+    return `${parts[0]} | CapRover (internal)`;
+  }
+});
+
 const routes = [
   {
     path: "/",

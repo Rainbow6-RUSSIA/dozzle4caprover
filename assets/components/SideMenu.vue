@@ -41,7 +41,7 @@
         >
           <div class="container is-flex is-align-items-center">
             <div class="is-flex-grow-1 is-ellipsis">
-              {{ item.name }}
+              {{ item.name | caprover }}
             </div>
             <div class="is-flex-shrink-1 column-icon">
               <span
