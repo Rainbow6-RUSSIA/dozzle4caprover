@@ -85,6 +85,10 @@
       <div class="item">
         <b-switch v-model="lightTheme"> Use light theme </b-switch>
       </div>
+
+      <div class="item">
+        <b-switch v-model="caproverIntergration"> Enable Caprover integration </b-switch>
+      </div>
     </section>
   </div>
 </template>
@@ -129,20 +133,26 @@ export default {
   },
   computed: {
     ...mapState(["settings"]),
-    ...["search", "size", "smallerScrollbars", "showTimestamp", "showAllContainers", "lightTheme", "hourStyle"].reduce(
-      (map, name) => {
-        map[name] = {
-          get() {
-            return this.settings[name];
-          },
-          set(value) {
-            this.updateSetting({ [name]: value });
-          },
-        };
-        return map;
-      },
-      {}
-    ),
+    ...[
+      "search",
+      "size",
+      "smallerScrollbars",
+      "showTimestamp",
+      "showAllContainers",
+      "lightTheme",
+      "hourStyle",
+      "caproverIntergration",
+    ].reduce((map, name) => {
+      map[name] = {
+        get() {
+          return this.settings[name];
+        },
+        set(value) {
+          this.updateSetting({ [name]: value });
+        },
+      };
+      return map;
+    }, {}),
   },
 };
 </script>
