@@ -33,16 +33,16 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 import LogViewerWithSource from "./LogViewerWithSource";
 import ScrollableView from "./ScrollableView";
 import ContainerTitle from "./ContainerTitle";
 import ContainerStat from "./ContainerStat";
 import Icon from "./Icon";
 import config from "../store/config";
+import containerMixin from "./mixins/container";
 
 export default {
+  mixins: [containerMixin],
   props: {
     id: {
       type: String,
@@ -69,10 +69,6 @@ export default {
     Icon,
   },
   computed: {
-    ...mapGetters(["allContainersById"]),
-    container() {
-      return this.allContainersById[this.id];
-    },
     base() {
       return config.base;
     },

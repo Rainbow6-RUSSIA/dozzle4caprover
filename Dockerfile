@@ -1,7 +1,7 @@
 # Build assets
-FROM node:current-alpine as node
+FROM node:16-alpine as node
 
-RUN apk add --no-cache git openssh python make g++ util-linux
+RUN apk add --no-cache git openssh make g++ util-linux
 
 WORKDIR /build
 
@@ -18,7 +18,7 @@ COPY assets ./assets
 # Do the build
 RUN yarn build
 
-FROM golang:1.16-alpine AS builder
+FROM golang:1.17.0-alpine AS builder
 
 RUN apk add --no-cache git ca-certificates
 RUN mkdir /dozzle
